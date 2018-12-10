@@ -7,13 +7,14 @@
             :id="branch"
             name="branch"
             v-model="currentBranch"
+            v-bind:key="index"
             >
-            <label :for="branch">{{ branch }}</label>
+            <label :for="branch" v-bind:key="index">{{ branch }}</label>
         </template>
         <p>vuejs/vue@{{ currentBranch }}</p>
         <ul>
-            <li v-for="record in commits" >
-                <a :href="record.html_url" target="_blank" class="commit" >{{ record.sha.slice(0,7) }}</a>
+            <li v-for="record in commits" :key="record.num">
+                <a :href="record.html_url" target="_blank" class="commit">{{ record.sha.slice(0,7) }}</a>
                 - <span class="message">{{ record.commit.message | truncate }}</span><br>
                 by <span class="author"><a :href="record.author.html_url" target="_blank">{{ record.commit.author.name }}</a></span>
                 at <span class="date">{{ record.commit.author.date | formatDate }}</span>
